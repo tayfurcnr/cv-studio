@@ -1,0 +1,59 @@
+# ============================================================
+# ÖRNEK CV DOSYASI
+#
+# Bir CV içerik tutmaz — kütüphaneden *seçim* yapar. Aşağıdaki
+# itemIds değerleri ornek-veri.yaml'daki id'lere karşılık gelir.
+# İkisini birlikte yüklersen çalışan bir CV çıkar.
+#
+# Aynı kütüphaneden istediğin kadar CV türetebilirsin: farklı
+# projeler seç, sırayı değiştir, temayı değiştir.
+# ============================================================
+
+documents:
+  - id: doc-gomulu
+    name: Gömülü Yazılım Mühendisi
+    lang: tr
+    theme: signal              # signal | slate | serif
+    accent: "#1d5c7a"
+    texture: grain             # none | grain | dots | grid | wash
+    showPhoto: true
+    showIcons: true
+    referencesOnRequest: true
+    targetRole:
+      tr: Gömülü Yazılım Mühendisi
+      en: Embedded Software Engineer
+    summaryId: sum-genel
+    sections:
+      - { id: summary,     enabled: true,  itemIds: [] }
+      - { id: experience,  enabled: true,  itemIds: [exp-ornek] }
+      - { id: projects,    enabled: true,  itemIds: [prj-telemetri, prj-arayuz] }
+      - { id: skills,      enabled: true,  itemIds: [skl-diller, skl-gomulu] }
+      - { id: education,   enabled: true,  itemIds: [edu-ornek] }
+      - { id: languages,   enabled: true,  itemIds: [lng-en] }
+      - { id: certifications, enabled: false, itemIds: [] }
+      - { id: references,  enabled: false, itemIds: [] }
+
+  # Aynı kütüphaneden ikinci bir CV: İngilizce, farklı tema,
+  # fotoğrafsız (yurt dışı başvurularının standardı).
+  - id: doc-en
+    name: Embedded — EN
+    lang: en
+    theme: slate
+    accent: "#1f3a5f"
+    texture: none
+    showPhoto: false
+    showIcons: false
+    referencesOnRequest: true
+    targetRole:
+      tr: ""
+      en: Embedded Software Engineer
+    summaryId: sum-genel
+    sections:
+      - { id: summary,     enabled: true,  itemIds: [] }
+      - { id: experience,  enabled: true,  itemIds: [exp-ornek] }
+      - { id: projects,    enabled: true,  itemIds: [prj-telemetri] }
+      - { id: skills,      enabled: true,  itemIds: [skl-diller, skl-gomulu] }
+      - { id: education,   enabled: true,  itemIds: [edu-ornek] }
+      - { id: languages,   enabled: false, itemIds: [] }
+      - { id: certifications, enabled: false, itemIds: [] }
+      - { id: references,  enabled: false, itemIds: [] }

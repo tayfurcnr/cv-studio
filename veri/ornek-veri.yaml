@@ -1,0 +1,176 @@
+# ============================================================
+# ÖRNEK VERİ DOSYASI
+#
+# Uygulamanın beklediği biçimi gösterir. Kendi verini yazarken
+# bunu kopyalayıp içini doldurabilirsin — ya da uygulamada
+# "Dosya yükle ve yedekle" bölümünden boş şablonu indirirsin.
+#
+# Kurallar:
+#   · Her metin alanı {tr, en} çifti tutar. Bir dili boş bırakırsan
+#     CV o alanda otomatik diğerine düşer.
+#   · id'ler CV kompozisyonlarının kütüphaneye bağlandığı yer.
+#     Bir id'yi değiştirirsen o kaydı kullanan CV'ler kopar.
+#   · Fotoğraf bu dosyada değil: base64 tek satırda binlerce
+#     karakter tuttuğu için ayrı indirilir.
+# ============================================================
+
+profile:
+  fullName: Ada Yılmaz
+  headline:
+    tr: Elektrik-Elektronik Mühendisi
+    en: Electrical & Electronics Engineer
+  email: ada@example.com
+  phone: "+90 500 000 00 00"
+  location:
+    tr: İstanbul, Türkiye
+    en: Istanbul, Türkiye
+  linkedin: linkedin.com/in/kullanici
+  github: github.com/kullanici
+  website: ""
+
+summaries:
+  - id: sum-genel
+    label:
+      tr: Genel
+      en: General
+    text:
+      tr: >-
+        Gömülü sistemler üzerine çalışan bir mühendisim. Mikrodenetleyici
+        tarafında gerçek zamanlı yazılım yazıyor, üzerinde çalıştığı kartın
+        tasarımına da katkı veriyorum.
+      en: >-
+        An engineer working on embedded systems. I write real-time firmware
+        on microcontrollers and contribute to the design of the boards it
+        runs on.
+
+experience:
+  - id: exp-ornek
+    role:
+      tr: Gömülü Yazılım Mühendisi
+      en: Embedded Software Engineer
+    org:
+      tr: Örnek Teknoloji
+      en: Example Technology
+    variant: ""
+    location:
+      tr: İstanbul, Türkiye
+      en: Istanbul, Türkiye
+    employment:
+      tr: Tam Zamanlı
+      en: Full-time
+    start:
+      tr: Oca 2023
+      en: Jan 2023
+    end:
+      tr: Günümüz
+      en: Present
+    bullets:
+      - tr: >-
+          Sensör verisini toplayıp işleyen gerçek zamanlı yazılımı C ile
+          yazdım; örnekleme gecikmesini 40 ms'den 12 ms'ye indirdim.
+        en: >-
+          Wrote the real-time firmware in C that collects and processes
+          sensor data; cut sampling latency from 40 ms to 12 ms.
+      - tr: >-
+          Donanım testlerini otomatikleştirdim; her sürümde elle tekrarlanan
+          test turları ortadan kalktı.
+        en: >-
+          Automated the hardware test suite, removing the manual test rounds
+          that were repeated on every release.
+
+education:
+  - id: edu-ornek
+    school:
+      tr: Örnek Üniversitesi
+      en: Example University
+    degree:
+      tr: Elektrik-Elektronik Mühendisliği, Lisans
+      en: BSc Electrical & Electronics Engineering
+    location:
+      tr: İstanbul, Türkiye
+      en: Istanbul, Türkiye
+    start:
+      tr: "2018"
+      en: "2018"
+    end:
+      tr: "2022"
+      en: "2022"
+    note:
+      tr: ""
+      en: ""
+
+projects:
+  - id: prj-telemetri
+    name:
+      tr: Telemetri Kartı
+      en: Telemetry Board
+    tagline:
+      tr: Uzun menzilli veri bağlantısı için gömülü kart
+      en: Embedded board for a long-range data link
+    variant: ""
+    link: github.com/kullanici/telemetri
+    category: embedded
+    year: ""
+    tech:
+      tr: [C, STM32, FreeRTOS, SPI, KiCad]
+      en: [C, STM32, FreeRTOS, SPI, KiCad]
+    bullets:
+      - tr: >-
+          Radyo modülünün sürücüsünü ve paket katmanını yazdım; CRC
+          doğrulaması ve yeniden gönderim mikrodenetleyici tarafında çalışıyor.
+        en: >-
+          Wrote the radio driver and packet layer; CRC validation and
+          retransmission run on the microcontroller.
+      - tr: Kartın şemasını ve 4 katlı PCB'sini kendim çizdim.
+        en: Drew the schematic and the 4-layer PCB myself.
+
+  - id: prj-arayuz
+    name:
+      tr: Yer İstasyonu Arayüzü
+      en: Ground Station Interface
+    tagline:
+      tr: Telemetri verisini canlı gösteren masaüstü arayüz
+      en: Desktop interface showing live telemetry
+    variant: ""
+    link: ""
+    category: software
+    year: ""
+    tech:
+      tr: [Python, Qt, asyncio]
+      en: [Python, Qt, asyncio]
+    bullets:
+      - tr: >-
+          Saniyede 200 paketi düşürmeden çizen bir görselleştirme katmanı
+          kurdum.
+        en: >-
+          Built a visualization layer that renders 200 packets per second
+          without dropping frames.
+
+skillGroups:
+  - id: skl-diller
+    label:
+      tr: Diller
+      en: Languages
+    items:
+      tr: [C, C++, Python]
+      en: [C, C++, Python]
+  - id: skl-gomulu
+    label:
+      tr: Gömülü
+      en: Embedded
+    items:
+      tr: [STM32, FreeRTOS, SPI, I2C, UART, CAN]
+      en: [STM32, FreeRTOS, SPI, I2C, UART, CAN]
+
+languages:
+  - id: lng-en
+    name:
+      tr: İngilizce
+      en: English
+    level:
+      tr: İleri seviye
+      en: Advanced
+
+certifications: []
+
+references: []

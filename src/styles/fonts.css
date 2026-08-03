@@ -1,0 +1,53 @@
+/* ============================================================
+   FONTLAR
+   Hepsi projeye gömülü (@fontsource) — CDN yok, internet gerekmiyor,
+   PDF'e basarken de aynı dosyalar kullanılıyor.
+
+   Neden değişken (variable) değil de statik sürümler?
+   Chrome, yazdırma sırasında değişken fontları PDF'e Type 3 olarak
+   gömüyor: metin yine seçilebilir kalıyor ama gömme kalitesi düşük
+   ve bazı PDF okuyucular/parser'lar bu biçimi iyi işlemiyor. Statik
+   ağırlıklarda ise gerçek CID TrueType olarak gömülüyor.
+
+   Üçünde de latin-ext alt kümesi var; Türkçe ğ ş İ Ğ Ş
+   (U+0100–02BA) ve ı (U+0131) sorunsuz çıkıyor.
+   ============================================================ */
+
+/* --- Gövde metni: Inter (400 / 500 / 600 / 700) ------------- */
+@import '@fontsource/inter/latin-400.css';
+@import '@fontsource/inter/latin-ext-400.css';
+@import '@fontsource/inter/latin-500.css';
+@import '@fontsource/inter/latin-ext-500.css';
+@import '@fontsource/inter/latin-600.css';
+@import '@fontsource/inter/latin-ext-600.css';
+@import '@fontsource/inter/latin-700.css';
+@import '@fontsource/inter/latin-ext-700.css';
+
+/* --- Başlıklar: Manrope (signal + slate temaları) -----------
+   Yalnızca isim ve bölüm başlıklarında kullanılıyor; pozisyon
+   satırları ve beceri etiketleri gövde fontunda kalıyor ki
+   sayfada gereksiz font değişimi olmasın. */
+@import '@fontsource/manrope/latin-300.css';
+@import '@fontsource/manrope/latin-ext-300.css';
+@import '@fontsource/manrope/latin-500.css';
+@import '@fontsource/manrope/latin-ext-500.css';
+@import '@fontsource/manrope/latin-600.css';
+@import '@fontsource/manrope/latin-ext-600.css';
+@import '@fontsource/manrope/latin-700.css';
+@import '@fontsource/manrope/latin-ext-700.css';
+@import '@fontsource/manrope/latin-800.css';
+@import '@fontsource/manrope/latin-ext-800.css';
+
+/* --- Serif tema başlıkları: Fraunces ------------------------ */
+@import '@fontsource/fraunces/latin-500.css';
+@import '@fontsource/fraunces/latin-ext-500.css';
+@import '@fontsource/fraunces/latin-600.css';
+@import '@fontsource/fraunces/latin-ext-600.css';
+@import '@fontsource/fraunces/latin-500-italic.css';
+@import '@fontsource/fraunces/latin-ext-500-italic.css';
+
+:root {
+  --font-body: 'Inter', -apple-system, 'Segoe UI', 'Liberation Sans', Arial, sans-serif;
+  --font-display: 'Manrope', 'Inter', 'Liberation Sans', Arial, sans-serif;
+  --font-serif: 'Fraunces', Georgia, 'Liberation Serif', serif;
+}

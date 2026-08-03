@@ -1,0 +1,13 @@
+node_modules
+dist
+
+# Kişisel veri bu depoya girmemeli. veri/ altındaki her şey dışlanır,
+# yalnızca örnek şablonlar izlenir.
+veri/*
+!veri/ornek-veri.yaml
+!veri/ornek-cvler.yaml
+
+referans/
+*-foto.txt
+*-yedek-*.json
+*-yedek-*.yaml

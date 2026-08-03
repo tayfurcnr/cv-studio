@@ -1,0 +1,423 @@
+/* ============================================================
+   CV BELGESİ STİLLERİ
+   Kural: tüm görsellik CSS'ten gelir. Metin hiçbir zaman
+   görsele, tabloya veya çok sütunlu düzene gömülmez.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   SAYFA BOŞLUKLARI — @page üzerinde, .resume padding'inde DEĞİL.
+
+   Bu kritik: padding çok sayfalı bir blokta yalnızca akışın
+   başında ve sonunda uygulanır, her sayfada tekrarlanmaz. Boşluk
+   .resume'a verildiğinde 2. sayfa kağıdın tam köşesinden başlıyordu.
+   @page margin ise her sayfaya ayrı ayrı uygulanır.
+   ------------------------------------------------------------ */
+@page {
+  size: A4;
+  margin: 13mm 14mm;
+}
+
+.resume {
+  --ink: #14171c;
+  --muted: #5b6069;
+  --rule: #dde0e5;
+  --wash: #f4f6f8;
+  --accent: #1d5c7a;
+
+  /* Ekranda A4'ü taklit et; baskıda bunları @page devralır */
+  width: 210mm;
+  min-height: 297mm;
+  padding: 13mm 14mm 15mm;
+
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 10.4pt;
+  line-height: 1.46;
+  box-sizing: border-box;
+  font-feature-settings: 'kern' 1, 'liga' 1;
+  text-rendering: optimizeLegibility;
+}
+.resume *,
+.resume *::before,
+.resume *::after { box-sizing: border-box; }
+
+/* ============================================================
+   ARKA PLAN DOKULARI
+
+   Tamamen CSS — metin katmanına hiçbir şey eklemezler, yani ATS
+   açısından yoklar. Doku `.resume` elemanının background'ı olarak
+   veriliyor; sayfaya bölünen bir kutunun arka planı her parçada
+   yeniden boyandığı için 2. ve 3. sayfada da devam ediyor.
+
+   Hepsi bilinçli olarak çok düşük kontrastlı: metin okunurluğunu
+   ve yazıcıda toner tüketimini bozmayacak seviyede.
+   ============================================================ */
+
+/* İnce nokta ızgarası — 0.7px nokta baskıda kayboluyordu */
+.texture-dots {
+  background-image: radial-gradient(circle, rgba(20, 23, 28, 0.075) 1px, transparent 1px);
+  background-size: 14px 14px;
+}
+
+/* Kılcal kareli ızgara (teknik çizim hissi) */
+.texture-grid {
+  background-image:
+    linear-gradient(rgba(20, 23, 28, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 23, 28, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Kağıt dokusu — SVG gürültü filtresi */
+.texture-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+}
+
+/* Köşeden vurgu rengiyle yumuşak geçiş */
+.texture-wash {
+  background-image:
+    radial-gradient(circle at 100% 0%,
+      color-mix(in srgb, var(--accent) 9%, transparent) 0%,
+      transparent 42%);
+  background-repeat: no-repeat;
+}
+
+.resume p, .resume h1, .resume h2, .resume h3, .resume ul { margin: 0; }
+
+/* Köprüler tıklanabilir ama görsel olarak düz metin gibi dursun —
+   mavi/altı çizili bağlantı CV'de amatör durur. */
+.resume a { color: inherit; text-decoration: none; }
+
+/* ---------- Başlık ---------------------------------------- */
+.r-header {
+  display: flex;
+  align-items: center;
+  gap: 9mm;
+  margin-bottom: 7mm;
+}
+.r-id { flex: 1; min-width: 0; }
+
+.r-name {
+  font-family: var(--font-display);
+  font-size: 2.38em;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  /* 1.02 çok sıkıydı: Ç'nin çengeli, ğ'nin kuyruğu ve j/y gibi
+     alt uzantılar satır kutusunun dışına taşıp alttaki ünvana
+     değiyordu. Türkçe adlarda bu sık görülüyor. */
+  line-height: 1.16;
+  margin-bottom: 0.26rem;
+}
+
+.r-headline {
+  font-size: 1em;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--accent);
+  margin-bottom: 0.55rem;
+}
+
+.r-contact {
+  font-size: 0.87em;
+  font-weight: 400;
+  color: var(--muted);
+  line-height: 1.7;
+  font-variant-numeric: tabular-nums;
+}
+
+/* İkonlu mod: ayraç yerine flex gap.
+   Öğeler kendi içinde bölünmesin (nowrap) ama aralarında satır
+   kırma olabilsin diye flex-wrap kullanıyoruz — ayracı metnin
+   içine koysaydık nowrap kırılmayı da engellerdi. */
+.r-contact.with-icons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 1.05rem;
+}
+.r-contact.with-icons .r-contact-item { white-space: nowrap; }
+
+.r-icon {
+  display: inline-block;
+  vertical-align: -0.13em;
+  margin-right: 0.34em;
+  opacity: 0.72;
+  font-size: 1.02em;
+}
+.r-sep { color: var(--rule); }
+
+.r-photo {
+  width: 29mm;
+  height: 29mm;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 2.5px solid var(--accent);
+}
+
+/* ---------- Bölümler --------------------------------------- */
+.r-section { margin-bottom: 4.5mm; }
+.r-section:last-child { margin-bottom: 0; }
+
+.r-section > h2 {
+  font-family: var(--font-display);
+  font-size: 0.76em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.145em;
+  color: var(--accent);
+  padding-bottom: 0.3rem;
+  margin-bottom: 0.62rem;
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+.r-section > h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 26px;
+  height: 2px;
+  background: var(--accent);
+}
+
+/* ---------- Kayıtlar --------------------------------------- */
+.r-entry { margin-bottom: 3.3mm; }
+.r-entry:last-child { margin-bottom: 0; }
+
+.r-entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6mm;
+}
+
+/* Gövde fontunda: başlık fontunu isim ve bölüm başlıklarıyla
+   sınırlı tutuyoruz, yoksa sayfa font değişiminden gürültülü olur. */
+.r-role {
+  font-size: 1em;
+  font-weight: 650;
+  letter-spacing: -0.008em;
+  line-height: 1.32;
+}
+.r-org {
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--accent);
+}
+
+.r-meta {
+  font-size: 0.83em;
+  font-weight: 500;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.r-sub {
+  font-size: 0.89em;
+  color: var(--muted);
+  margin-top: 0.08rem;
+}
+
+.r-bullets {
+  padding-left: 1.02em;
+  margin-top: 0.3rem;
+}
+.r-bullets li { margin-bottom: 0.17rem; }
+.r-bullets li::marker { color: var(--accent); font-size: 0.85em; }
+
+.r-link {
+  font-size: 0.82em;
+  color: var(--accent);
+  margin-top: 0.16rem;
+  letter-spacing: 0.005em;
+}
+
+.r-tech {
+  font-size: 0.83em;
+  color: var(--muted);
+  margin-top: 0.28rem;
+  letter-spacing: 0.005em;
+}
+
+.r-summary { text-align: justify; hyphens: auto; }
+.r-inline { font-size: 0.97em; }
+
+/* ---------- Etiket + değer satırları (beceriler) ------------ */
+.r-rows { display: flex; flex-direction: column; gap: 0.24rem; }
+.r-row { display: flex; gap: 0.75rem; align-items: baseline; }
+.r-row-label {
+  flex: 0 0 40mm;
+  font-weight: 700;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--accent);
+}
+.r-row-value { flex: 1; min-width: 0; }
+
+.r-ref .r-sub { margin-top: 0; }
+
+/* ============================================================
+   TEMA: SIGNAL — varsayılan
+   Aksan çizgili başlık, sıkı tipografi. Teknik roller.
+   ============================================================ */
+.theme-signal .r-header {
+  border-left: 3px solid var(--accent);
+  padding-left: 5mm;
+  padding-top: 0.5mm;
+  padding-bottom: 0.5mm;
+}
+
+/* ============================================================
+   TEMA: SLATE — koyu bant
+   Sayfa kenarına taşan koyu başlık. Kurumsal, cesur.
+   ============================================================ */
+.theme-slate .r-header {
+  margin: -13mm -14mm 7mm;
+  padding: 12mm 14mm;
+  background: var(--accent);
+  color: #fff;
+  align-items: center;
+}
+.theme-slate .r-name {
+  color: #fff;
+  font-weight: 300;
+  letter-spacing: 0.005em;
+  /* Ünvan büyük harf ve hemen altta; alt uzantılara fazladan pay */
+  line-height: 1.22;
+  margin-bottom: 0.4rem;
+}
+.theme-slate .r-headline {
+  font-family: var(--font-display);
+  color: #fff;
+  opacity: 0.84;
+  font-size: 0.8em;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+.theme-slate .r-contact {
+  color: #fff;
+  opacity: 0.8;
+  padding-top: 0.6rem;
+  margin-top: 0.55rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.24);
+}
+.theme-slate .r-photo { border-color: rgba(255, 255, 255, 0.85); }
+.theme-slate .r-section > h2 {
+  border-bottom-width: 1.5px;
+  border-bottom-color: var(--accent);
+}
+.theme-slate .r-section > h2::after { display: none; }
+.theme-slate .r-meta {
+  color: #fff;
+  background: var(--accent);
+  padding: 0.1rem 0.45rem;
+  border-radius: 3px;
+  font-size: 0.78em;
+  font-weight: 500;
+}
+
+/* ============================================================
+   TEMA: SERIF — editöryel
+   Fraunces başlıklar, ferah satır aralığı. Ar-Ge / akademi.
+   ============================================================ */
+.theme-serif {
+  font-size: 10.3pt;
+  line-height: 1.56;
+}
+.theme-serif .r-name {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 2.45em;
+  letter-spacing: -0.02em;
+  /* Fraunces'ın kuyrukları derin, ünvan da büyük harf → daha çok pay */
+  line-height: 1.24;
+  margin-bottom: 0.42rem;
+}
+.theme-serif .r-headline {
+  font-size: 0.79em;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.theme-serif .r-header {
+  padding-bottom: 5mm;
+  border-bottom: 1px solid var(--rule);
+}
+.theme-serif .r-section > h2 {
+  font-family: var(--font-serif);
+  font-size: 1.05em;
+  font-weight: 500;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -0.005em;
+}
+.theme-serif .r-section > h2::after { display: none; }
+.theme-serif .r-role {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 1.03em;
+  letter-spacing: -0.005em;
+}
+.theme-serif .r-meta { font-size: 0.86em; font-weight: 500; }
+.theme-serif .r-row-label {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 0.94em;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.theme-serif .r-bullets { list-style-type: "—  "; padding-left: 1em; }
+.theme-serif .r-photo { border-radius: 3px; width: 26mm; height: 32mm; }
+
+/* ============================================================
+   YAZDIRMA
+   Ekran arayüzü gizlenir, yalnızca belge basılır.
+   ============================================================ */
+.print-mount { display: none; }
+
+@media print {
+  html, body { margin: 0; padding: 0; background: #fff; }
+  .app { display: none !important; }
+  .print-mount { display: block !important; }
+
+  .resume {
+    /* Boşluk artık @page'den geliyor — burada padding OLMAMALI,
+       yoksa 1. sayfa çift boşluklu, sonrakiler boşluksuz kalır. */
+    width: auto;
+    min-height: 0;
+    padding: 0;
+    box-shadow: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Taşan bant, sayfa kenar boşluğunun içine doğru genişler */
+  .theme-slate .r-header {
+    margin: -13mm -14mm 7mm;
+    padding: 12mm 14mm;
+  }
+
+  /* --- Sayfa kırılımı kuralları --- */
+  .r-header       { break-inside: avoid; }
+  .r-entry        { break-inside: avoid; }
+  .r-row          { break-inside: avoid; }
+  .r-bullets li   { break-inside: avoid; }
+
+  /* Başlık sayfa sonunda tek başına kalmasın */
+  .r-section > h2 { break-after: avoid; }
+  /* Pozisyon satırı maddelerinden kopmasın */
+  .r-entry-head   { break-after: avoid; }
+
+  /* Uzun bölümler sayfaya bölünebilir, kayıtlar bölünemez */
+  .r-section { break-inside: auto; }
+
+  /* Tek satır sarkmalarını engelle */
+  .resume p, .resume li { orphans: 2; widows: 2; }
+}
