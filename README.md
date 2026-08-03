@@ -8,6 +8,14 @@ npm install
 npm run dev      # http://localhost:5180
 ```
 
+## GitHub Pages'e yayınlama
+
+`main` dalına gönderilen her değişiklik GitHub Actions ile otomatik olarak derlenip
+GitHub Pages'e yayınlanır. Depoda bir kez **Settings → Pages → Build and deployment →
+Source** alanından **GitHub Actions** seçilmelidir.
+
+Yayın adresi: `https://tayfurcnr.github.io/cv-studio/`
+
 Uygulama **boş açılır**. İki yol var:
 
 - **Sıfırdan yaz** — *Kütüphanem*'de kişisel bilgilerinden başlayıp içeriğini tek tek
