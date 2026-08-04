@@ -15,6 +15,20 @@ import { slugify, tx, printDocument } from '../lib/text.js'
 const A4_W = 793.7   // 210mm @ 96dpi
 const A4_H = 1122.5  // 297mm @ 96dpi
 
+/* Sayfa sayısı ekran yüksekliğinden değil YAZDIRMA geometrisinden
+   hesaplanır. Ekranda belge tek bir uzun blok: üstte 13mm, altta
+   15mm padding var ve bunlar yalnızca bir kez uygulanır. Baskıda
+   ise @page her sayfaya 13mm üst + 13mm alt boşluk koyar, yani
+   sayfa başına 271mm içerik alanı kalır.
+
+   Eski hesap ekran yüksekliğini 297mm'ye bölüp %2 tolerans
+   ekliyordu; bu tolerans gerçek taşmaları gizliyordu — önizleme
+   "2 sayfa" derken PDF 3 sayfa çıkıyordu. */
+const MM = 96 / 25.4
+const PAD_UST = 13 * MM
+const PAD_ALT = 15 * MM
+const SAYFA_ICERIK = 271 * MM   // 297mm − 13mm üst − 13mm alt
+
 export default function Preview({ resumeRef }) {
   const { doc, library } = useStore()
   const stage = useRef(null)
@@ -60,7 +74,9 @@ export default function Preview({ resumeRef }) {
     return () => ro.disconnect()
   }, [resumeRef])
 
-  const pages = Math.max(1, Math.ceil(docHeight / A4_H - 0.02))
+  const icerik = Math.max(0, docHeight - PAD_UST - PAD_ALT)
+  const pages = Math.max(1, Math.ceil((icerik - 1) / SAYFA_ICERIK))
+  const doluluk = icerik / (pages * SAYFA_ICERIK)
 
   return (
     <div className="preview">

@@ -33,7 +33,7 @@
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 10.4pt;
-  line-height: 1.46;
+  line-height: 1.43;
   box-sizing: border-box;
   font-feature-settings: 'kern' 1, 'liga' 1;
   text-rendering: optimizeLegibility;
@@ -157,7 +157,7 @@
 }
 
 /* ---------- Bölümler --------------------------------------- */
-.r-section { margin-bottom: 4.5mm; }
+.r-section { margin-bottom: 3.9mm; }
 .r-section:last-child { margin-bottom: 0; }
 
 .r-section > h2 {
@@ -168,7 +168,7 @@
   letter-spacing: 0.145em;
   color: var(--accent);
   padding-bottom: 0.3rem;
-  margin-bottom: 0.62rem;
+  margin-bottom: 0.54rem;
   border-bottom: 1px solid var(--rule);
   position: relative;
 }
@@ -183,7 +183,7 @@
 }
 
 /* ---------- Kayıtlar --------------------------------------- */
-.r-entry { margin-bottom: 3.3mm; }
+.r-entry { margin-bottom: 2.9mm; }
 .r-entry:last-child { margin-bottom: 0; }
 
 .r-entry-head {
@@ -226,7 +226,7 @@
   padding-left: 1.02em;
   margin-top: 0.3rem;
 }
-.r-bullets li { margin-bottom: 0.17rem; }
+.r-bullets li { margin-bottom: 0.13rem; }
 .r-bullets li::marker { color: var(--accent); font-size: 0.85em; }
 
 .r-link {
